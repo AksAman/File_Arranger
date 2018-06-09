@@ -19,14 +19,35 @@ except FileNotFoundError:
 
 
 fileTypedict={}
-files=os.listdir()
+files=[]
+
+for f in os.listdir():
+	if (not os.path.isdir(f)):
+		if(not f.find('.') is -1):
+			files.append(f)
+
 for file in files:
-	if (not os.path.isdir(file)):
-		if(not file.find('.') is -1):
-			extension=file.split('.')[-1]
-			fileTypedict[extension]=''
+	extension=file.split('.')[-1].lower()
+	fileTypedict[extension]=[]
 
-print(fileTypedict)
+for ext in fileTypedict:
+	for file in files:
+		curExt=file.split('.')[-1].lower()
+		if(curExt == ext):
+			fileTypedict[ext].append(file)
+
+# print('after append')
+# print(fileTypedict)
+
+for ext in fileTypedict:
+	try:
+		os.mkdir(ext)
+	except Exception:
+		print(Exception)
 
 
-
+for ext in fileTypedict:
+	for file in fileTypedict[ext]:
+		command='move "'+file+'" '+'"'+ext+'"'
+		print(command)
+		os.system(command)
