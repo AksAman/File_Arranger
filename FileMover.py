@@ -9,7 +9,6 @@ parser.add_argument(
     'path', help='The path, where you want to arrange your files [write the path in \'\'] and end with \\')
 args = parser.parse_args()
 path = args.path
-print(path)
 
 # changing to specified path
 try:
@@ -54,7 +53,7 @@ for ext in fileTypedict:
         # Making empty directory as per extension
         os.mkdir(ext)
     except Exception as e:
-        print(e.message)
+        print(e)
 
 
 # Finally running system command for move
